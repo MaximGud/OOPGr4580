@@ -4,6 +4,10 @@ public class OrdinaryClient extends Actor {
     // private boolean setTakeOrder;
     // private boolean setMakeOrder;
 
+    /**
+     * Класс "Обычный покупатель"
+     * @param name - имя Покупателя
+     */
     public OrdinaryClient(String name) {
         super(name);
     }

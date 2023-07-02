@@ -7,11 +7,16 @@ import Interfaces.iActorBehaviuor;
 
 import Interfaces.iMarketBehaviour;
 import Interfaces.iQueueBehaviour;
+import Interfaces.iReturnOrder;
 
-public class Market implements iMarketBehaviour,iQueueBehaviour {
+
+public class Market implements iMarketBehaviour,iQueueBehaviour, iReturnOrder {
 
     private List<iActorBehaviuor> queue;
 
+    /**
+     * Класс Магазин
+     */
     public Market() {
         this.queue = new ArrayList<iActorBehaviuor>();
     }
@@ -88,6 +93,39 @@ public class Market implements iMarketBehaviour,iQueueBehaviour {
         }
         
     }
+
+    @Override
+    public boolean checkBuy() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'checkBuy'");
+    }
+
+    @Override
+    public boolean chekPack() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'chekPack'");
+    }
+
+    @Override
+    public void setAcceptReturn(boolean acceptReturn) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAcceptReturn'");
+    }
+
+    @Override
+    public void setMoneyReturn(boolean moneyReturn) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setMoneyReturn'");
+    }
+
+    @Override
+    public Actor getActor() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getActor'");
+    }
+   
+
+   
 
 
     

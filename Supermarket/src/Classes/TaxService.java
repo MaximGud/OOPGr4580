@@ -7,6 +7,10 @@ public class TaxService implements iActorBehaviuor {
     private boolean isTakeOrder;
     private boolean isMakeOrder;
 
+    /**
+     * Класс Налоговый клиент
+     * Имя Нал.аудит
+     */
     public TaxService() {
         this.name = "Tax audit";
     }
