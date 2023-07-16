@@ -7,5 +7,7 @@ public enum Command {
     UPDATE,
     LIST,
     DELETE,
-    EXIT    
+    EXIT,
+    YES,
+    NO    
 }

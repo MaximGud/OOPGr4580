@@ -1,73 +1,74 @@
 package Controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import Model.ModelList;
+import Model.ModelFile;
 import Model.Student;
-import View.View;
+import View.ViewEng;
 
 public class Controller {
 
-    private iGetModel model;
-    private iGetView view;
-    private List<Student> students = new ArrayList<>();
+    private ModelFile model;
+    private ViewEng view;
+    private HashMap<Long, Student> students = new HashMap<>();
 
-    public Controller(iGetModel model, iGetView view) {
+    public Controller(ModelFile model, ViewEng view) {
         this.model = model;
-        this.view = view;
+        this.view = (ViewEng) view;
     }
 
-    private boolean testData(List<Student> students)
-    {
-        if(students.size()>0)
-        {
+    private boolean testData(HashMap<Long, Student> students) {
+        if (students.size() > 0) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
 
-    public void update()
-    {
-        //MVP
-        students = model.getAllStudents();
-        if(testData(students))
-        {
-           view.printAllStudents(students);
-        }
-        else
-        {
+    public void update() throws NumberFormatException, IOException {
+        // MVP
+        students = model.getAllHashStudents();
+        if (testData(students)) {
+            view.printAllHashStudents(students);
+        } else {
             System.out.println("Список студентов пуст!");
         }
 
-        //MVC
-        //view.printAllStudents(model.getAllStudents());
+        // MVC
+        // view.printAllStudents(model.getAllStudents());
     }
 
-    public void run()
-    {
+    public void run() throws NumberFormatException, IOException {
         Command com = Command.NONE;
         boolean getNewIteration = true;
-        while(getNewIteration)
-        {
-            String command = view.prompt("Введите команду:");
+        while (getNewIteration) {
+            String command = view.prompt("Enter command:");
             com = Command.valueOf(command.toUpperCase());
-            switch(com)
-            {
+            switch (com) {
                 case EXIT:
-                    getNewIteration=false;
-                    System.out.println("Выход из программы!");
+                    getNewIteration = false;
+                    System.out.println("Programm stoped");
                     break;
                 case LIST:
-                    view.printAllStudents(model.getAllStudents());
+                    view.printAllHashStudents(model.getAllHashStudents());
                     break;
+
+                case DELETE:
+                    String inputId = view.prompt("Enter student ID for delete:");
+                    //удаление студента
+                    model.deleteStudent(inputId, students);
+                    System.out.println("Student deleted");
+                    //печать нового списка
+                    view.printAllHashStudents(model.getAllHashStudents());
+                    break;
+
             }
 
         }
-    }
 
-    
+    }
 }
