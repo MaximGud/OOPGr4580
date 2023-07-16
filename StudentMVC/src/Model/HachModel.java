@@ -11,14 +11,20 @@ public class HachModel implements iGetModel {
     this.students = students;
   }
 
-  @Override
-  public void deleteStudent(String idStudent, HashMap<Long, Student> students) {
-  }
+  
 
   @Override
   public HashMap<Long, Student> getAllHashStudents() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'getAllHashStudents'");
+  }
+
+
+
+  @Override
+  public void deleteStudent(Long idStudent) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'deleteStudent'");
   }
 
 }

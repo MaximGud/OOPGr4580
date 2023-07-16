@@ -10,5 +10,5 @@ import Model.Student;
 public interface iGetModel {
         
     public HashMap<Long,Student> getAllHashStudents() throws FileNotFoundException, NumberFormatException, IOException;
-    public void deleteStudent(String idStudent, HashMap<Long,Student> students) throws FileNotFoundException;
+    public void deleteStudent(Long idStudent);
 }

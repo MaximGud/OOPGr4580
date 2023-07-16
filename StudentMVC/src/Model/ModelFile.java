@@ -78,18 +78,9 @@ public class ModelFile implements iGetModel {
                 // переводим стринг в лонг (ключ)
                 Long number = Long.parseLong(param[0]);
                 // убираем пробелы во втрой части строки
-                String value1 = param[1].trim();
-                // определяем лишние символы для уделения
-                String[] charsToRemove = { ",", "[", "]", "Students", "age=", "name=", "id=" };
-
-                for (String c : charsToRemove) {
-
-                    value1 = value1.replace(String.valueOf(c), "");
-                }
-                // разделяем по пробелу получивушюся строку на массив строк из значений
-                String[] param2 = value1.split(" ");
-                // относим их на тип Студент
-                Student pers = new Student(param2[1], Integer.parseInt(param2[0]), Integer.parseInt(param2[2]));
+                String[] param2 = param[1].trim().split(" ");
+                Student pers = new Student(param2[0], Integer.parseInt(param2[1]), Integer.parseInt(param[0]));
+                // заносим данные в новый список
                 students.put(number, pers);
                 line = reader.readLine();
             }
@@ -97,57 +88,20 @@ public class ModelFile implements iGetModel {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        // возвращаем новый списко студентов
+        // возвращаем  список студентов
         return students;
     }
 
     @Override // метод удаления студента из списка по ID
-    public void deleteStudent(String idStudent, HashMap<Long, Student> students) throws FileNotFoundException {
-        long idStud = Long.parseLong(idStudent);
-
-        // открываем файл
-        File file = new File(fileName);
-        Scanner scanner = new Scanner(file);
-
-        while (scanner.hasNext()) {
-            // Считываем строки из файла
-            String line = scanner.nextLine();
-
-            // Разбиваем строку на пары ключ-значение
-            String[] tokens = line.split(":");
-
-            if (tokens.length == 2) {
-                // Преобразуем Long в Long
-                Long key = Long.parseLong(tokens[0]);
-                // разбиваем вторую часть строки на тип данных Student
-                // удаляем пунктуацию
-                String str = tokens[1].trim().replaceAll("\\p{Punct}", "");
-                String[] param2 = str.split(" ");
-                Student pers = new Student(param2[1], Integer.parseInt(param2[2]), Integer.parseInt(param2[3]));
-
-                // Если ключ уже есть в коллекции, удаляем его и значение
-                if (students.containsKey(idStud)) {
-                    students.remove(idStud);
-                }
-
-                students.put(key, pers);
-            }
+    public void deleteStudent(Long idStudent) {
+        // считываем список студентов с файла
+        HashMap<Long, Student> students2 = getAllHashStudents();
+        // удаляем студента в списке по ключу
+        if (students2.containsKey(idStudent)) {
+            students2.remove(idStudent);
         }
-
-        // Закрываем файл
-        scanner.close();
-
-        // Записываем коллекцию в файл
-        try (FileWriter fw = new FileWriter(fileName, true)) {
-            for (Map.Entry<Long, Student> mapElement : students.entrySet()) {
-
-                fw.write(mapElement.getKey() + " " + mapElement.getValue());
-                fw.append('\n');
-            }
-            fw.flush();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        // записываем новый список студентов в вфайл
+        saveAllStudentToFile(students2);
 
     }
 }

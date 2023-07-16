@@ -24,8 +24,10 @@ public class ModelList implements iGetModel {
     }
 
     @Override
-    public void deleteStudent(String idStudent, HashMap<Long, Student> students) {
+    public void deleteStudent(Long idStudent) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteStudent'");
     }
+
+   
 }

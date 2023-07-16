@@ -1,6 +1,7 @@
-101 : Students [age=21, name=Sergei, id=101]
-104 : Students [age=23, name=Lena, id=104]
-121 : Students [age=22, name=Ivan, id=121]
-171 : Students [age=25, name=Dasha, id=171]
-301 : Students [age=23, name=Igor, id=301]
-111 : Students [age=22, name=Andrey, id=111]
+
+101 : 21 Sergei
+104 : 23 Lena
+121 : 22 Ivan
+171 : 25 Dasha
+301 : 23 Igor
+111 : 22 Andrey

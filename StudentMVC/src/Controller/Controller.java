@@ -59,8 +59,10 @@ public class Controller {
 
                 case DELETE:
                     String inputId = view.prompt("Enter student ID for delete:");
+                    //переводим в лонг
+                    Long inputLongId = Long.parseLong(inputId);
                     //удаление студента
-                    model.deleteStudent(inputId, students);
+                    model.deleteStudent(inputLongId);
                     System.out.println("Student deleted");
                     //печать нового списка
                     view.printAllHashStudents(model.getAllHashStudents());
